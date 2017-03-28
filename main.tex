@@ -59,7 +59,8 @@
 \pdfnote{ 2) a) single cell data such as size of the nuclei, circularity just to name a few.} 
 \pdfnote{ 2) b) We can also account for more global features at the tissue level,}  
 \pdfnote{such as cell count, cell spatial distrubtions and global patterns.}
-\pdfnote{ 3) This type of information is absent from genomic data for instance.}
+\pdfnote{ 3) Trying to create biological relevant features. This is different just to maximizing a prediction value.}
+\pdfnote{ 4) This type of information is absent from genomic data for instance.}
 \pdfnote{Images contain valuable, complementary information with respect to other types of}
 \pdfnote{genomic data.}
 %
@@ -277,7 +278,10 @@ $$\min_{\mathcal{P}}C(\mathcal{P}) = \min_{\mathcal{P}} \{\max_{i=2
 
 
 \section{Results}
-
+\pdfnote{ -- Several remarks: On the probability output}
+\pdfnote{ 1) PangNet is too simple, it learns to simple decision, such as pixel color values}
+\pdfnote{ , in particular dark purple.}
+\pdfnote{ 2) Sacrificing resolution seems to help the networks better understand the concept of cell}
 \pdfnote{ -- It is evident that this post-processing step is highly depended }
 \pdfnote{on the probability output.} 
 \pdfnote{ -- A very bumpy probability map will lead to a very poor final segmentation.}
