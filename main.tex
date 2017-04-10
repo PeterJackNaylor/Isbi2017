@@ -1,4 +1,4 @@
-\documentclass{beamer}
+   \documentclass{beamer}
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{subcaption}
@@ -6,6 +6,7 @@
 \usepackage{cancel}
 \usepackage[export]{adjustbox}[2011/08/13]
 \setbeamercovered{transparent}
+\usepackage[font={small}]{caption}
 \usepackage{pdfcomment}
 \newcommand{\pdfnote}[1]{\marginnote{\pdfcomment[icon=note]{#1}}}
 
@@ -36,60 +37,70 @@
 
 \section{Introduction}
 
-\pdfnote{I work in a bioinformatic group named CBIO in Paris and we mostly work on }
-\pdfnote{cancer research related topics. If we think of bioinformaticiens we usually think}
-\pdfnote{of omics data, such as copy number analysis and so one in order to predict}
-\pdfnote{ patient prognosis...}
 
+% me --> CBIO --> bioinformatics.
+\pdfnote{I work in a bioinformatic group named CBIO in Paris and we mostly work on }
+\pdfnote{cancer research related topics.} 
+% bioinformatics --> omics data
+\pdfnote{Bioinformaticians usually work on omics data, such as DNA copy number, mutations}
+\pdfnote{or expression profiles.} 
+\pdfnote{In particular in cancer research, the objective is often to}
+\pdfnote{predict clinical variables such as prognosis or treatment response from omics data.}
 
 \begin{frame}{Nuclei segmentation: why should you care?}
 \includegraphics[width = 1.2\textwidth, center]{Standardbioinformatics.png}
 \end{frame}
-\pdfnote{ -- Our goal is the same, we are searching to estimate patient prognosis/treatement}
-\pdfnote{effect.}
-\pdfnote{ -- So, why should we care about nuclei segmentation for cancer research?}
-\pdfnote{We take another approach to answer cancer related questions:}
-\pdfnote{ --This flows through nuclei segmentation.}
+% our approach --> image data for prediction of clinical variables
+\pdfnote{Our goal is to use histopathology images for such predictions.}
 
-\pdfnote{ 1) We know that images contain a huge amount information.}
-\pdfnote{For a fact, we know that these images contain valuable information as} 
-\pdfnote{histopathologist check these images on a daily basis in clinical practice.}
-\pdfnote{ 2) How can we extract this relevant bioligical data?}
-\pdfnote{ One way would be to segment the nuclei, and from this detection we can extract}
-\pdfnote{ 2) a) single cell data such as size of the nuclei, circularity just to name a few.} 
-\pdfnote{ 2) b) We can also account for more global features at the tissue level,}  
-\pdfnote{such as cell count, cell spatial distrubtions and global patterns.}
-\pdfnote{ 3) Trying to create biological relevant features. This is different just to maximizing a prediction value.}
-\pdfnote{ 4) This type of information is absent from genomic data for instance.}
+% Why images?
 \pdfnote{Images contain valuable, complementary information with respect to other types of}
 \pdfnote{genomic data.}
-%
+\pdfnote{
+(1) images are informative about morphologies}
+\pdfnote{
+(2) images are informative about space}
+\pdfnote{
+(3) images are used already in clinical practice for diagnosis. }
+
+% why segmentation of nuclei
+%\pdfnote{ 1) We know that images contain a huge amount information.}
+\pdfnote{ 1) How can we extract this relevant bioligical data?}
+\pdfnote{ One way is to segment the nuclei, and from this detection we can extract}
+\pdfnote{ 2) a) single cell data such as size of the nuclei, circularity just to name a few.}
+\pdfnote{ 2) b) We can also account for more global features at the tissue level,}
+\pdfnote{such as cell count, cell spatial distributions and global patterns.}
+\pdfnote{ 3) Trying to create biologically relevant features. This is different just to maximizing a prediction accuracy.}
 
 
 \begin{frame}{Nuclei segmentation: why should you care?}
 \includegraphics[width = 1.2\textwidth, center]{Whatido.png}
 \end{frame}
 
-\pdfnote{ -- Nuclei segmentation is still the challenge in these types of approaches. }
+\pdfnote{ -- Segmentation of nuclei is therefore a key step for such approaches}
+\pdfnote{ -- but it remains a challenging problem. }
 \pdfnote{ -- Due to the large variability in cell types, cell shapes, cell phase, }
 \pdfnote{staining procedures and overall in real patients.}
 \pdfnote{ -- As we can see in this mosaic that has been elaborated with only a}
 \pdfnote{few patients, the variability in the image content can strongly vary}
 \pdfnote{from one patient to another, but also within one patient. }
-\pdfnote{ -- Which is the most appropriate way of dealing with this challenging} 
-\pdfnote{segmentation? }
-\pdfnote{ -- Traditionnal technics based on mathematical morphology are very}
-\pdfnote{hard to find for such data and seem to generalize very poorly.}
-\pdfnote{ -- We can think of Active contours and graphic based methods.}
-\pdfnote{I will give you two reason for why do we need a dataset}
-\pdfnote{ 1) It is also important to note that it is difficult to compare such results}
-\pdfnote{in the absence of an appropriate dataset.}
-\pdfnote{ 2) We thus turned to the most achieving results in computer vision,}
-\pdfnote{deep neural networks.}
-\pdfnote{However in order to apply such a supervised approach we are in need}
-\pdfnote{ of a dataset (again..)}
-\pdfnote{ Conclusion: So we decided to produce a representative dataset of }
-\pdfnote{the high variability and make it publicly available.}
+
+\pdfnote{ -- Many traditional methods, such as methods based on }
+\pdfnote{Mathematical Morphology,
+active contours and graph based methods have been proposed in the past.}
+\pdfnote{ -- Such methods often work well on relatively homogeneous subsets of nuclei,}
+\pdfnote{but have difficulties in coping with the large variability of nuclei illustrated here.}
+
+\pdfnote{ -- We therefore decided to investigate the use of Deep Learning for nuclei segmentation.}
+
+\pdfnote{ -- For this, the first thing we needed was a manually annotated data set that
+covers the variability typically encountered in real data sets.}
+\pdfnote{ -- The benefits of such a data set are thus two-fold: }
+\pdfnote{(1) It can serve as a training set for supervised learning approaches.}
+\pdfnote{(2) It can serve as a benchmark set for new methods.}
+
+\pdfnote{ Conclusion: So we decided to produce a data set representative of}
+\pdfnote{the high variability and make it publicly available.} 
 
 
 \begin{frame}{Nuclei segmentation: challenging task}
@@ -209,8 +220,8 @@ Pixel wise classification. Many possible designs:
 \end{footnotesize}
 
 \begin{figure}
-\includegraphics[width = 1.1\linewidth]{PangNet.png}
-\caption{PangNet  $\left[ \text{Pang et Al 2010}\right]$}
+\includegraphics[width = 1.4\linewidth, left]{FCN.png}
+\caption{FCN $\left[ \text{Long et Al 2014} \right]$}
 \end{figure}
 
 \end{column}
@@ -221,9 +232,10 @@ Pixel wise classification. Many possible designs:
 \caption{DeconvNet $\left[ \text{Noh et Al 2015} \right]$}
 \end{figure}
 
+
 \begin{figure}
-\includegraphics[width = 1.12\linewidth, left]{FCN.png}
-\caption{FCN $\left[ \text{Long et Al 2014} \right]$}
+\hspace{2cm }\includegraphics[width = 0.5\linewidth]{PangNet.png}
+\caption{PangNet  $\left[ \text{Pang et Al 2010}\right]$}
 \end{figure}
 
 \end{column}
@@ -288,46 +300,47 @@ $$\min_{\mathcal{P}}C(\mathcal{P}) = \min_{\mathcal{P}} \{\max_{i=2
 \pdfnote{ -- If the probability map is well suited. The parameter lambda can be adjusted,}
 \pdfnote{if too low: over segmentation, if too high: we won't be seperating cells.}
 
+
 \begin{frame}{Visual Results}
 
 \begin{columns}
 \begin{column}{0.3\textwidth}
 \begin{figure}
-\includegraphics[width = 0.8\linewidth]{RGB_pred} 
+\includegraphics[width = 0.8\linewidth]{RAW} 
 \caption{Input}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width = 0.8\linewidth]{GT_pred} 
+\includegraphics[width = 0.8\linewidth]{LBL} 
 \caption{Ground Truth}
 \end{figure}
 
 \end{column}
 \begin{column}{0.7\textwidth}
-\includegraphics[width=1.1\textwidth]{ResultVisualise}
+\includegraphics[width=1.1\textwidth]{Test}
 
 \end{column}
 \end{columns}
 \end{frame}
-
 \begin{frame}{Results summary}
-
-\begin{tabular}{r|c|c|c|c|}
-     &        FCN &     DeconvNet  & PangNet \\
+\begin{small}
+\begin{tabular}{r|c|c|c|c|c|}
+     &        FCN &     DeconvNet  & PangNet & Ensemble \\
 \hline
-Accuracy           &        0.942 (\textcolor{red}{0.955}) &     0.955 (\textcolor{red}{0.952}) &       0.925 \\
-Performance      &        0.873 (\textcolor{red}{0.889}) &     0.877 (\textcolor{red}{0.873}) &       0.806 \\
-IU                      &        0.787 (\textcolor{red}{0.823}) &     0.820 (\textcolor{red}{0.814}) &       0.720 \\
-Recall                &        0.781 (\textcolor{red}{0.799})  &     0.774 (\textcolor{red}{0.767}) &        0.655 \\
-Precision            &        0.784 (\textcolor{red}{0.861}) &     0.867 (\textcolor{red}{0.864}) &        0.784 \\
-F1                     &        0.776 (\textcolor{red}{0.828}) &     0.818 (\textcolor{red}{0.811}) &       0.675 \\
+Accuracy           &        0.942 (\textcolor{red}{0.955}) &     0.955 (\textcolor{red}{0.952}) &       0.925 & 0.944  (\textcolor{red}{0.953})  \\
+Performance      &        0.873 (\textcolor{red}{0.889}) &     0.877 (\textcolor{red}{0.873}) &       0.806 & 0.922 (\textcolor{red}{0.926}) \\
+IU                      &        0.787 (\textcolor{red}{0.823}) &     0.820 (\textcolor{red}{0.814}) &       0.720 & 0.804 (\textcolor{red}{0.825}) \\
+Recall                &        0.781 (\textcolor{red}{0.799})  &     0.774 (\textcolor{red}{0.767}) &        0.655 & 0.900 (\textcolor{red}{0.896}) \\
+Precision            &        0.784 (\textcolor{red}{0.861}) &     0.867 (\textcolor{red}{0.864}) &        0.784 & 0.741 (\textcolor{red}{0.777})  \\
+F1                     &        0.776 (\textcolor{red}{0.828}) &     0.818 (\textcolor{red}{0.811}) &       0.675 & 0.802 (\textcolor{red}{0.825}) \\
 \end{tabular} 
 \\
 \textit{In red are the results with the additionnal data.}
+\end{small}
 
 \begin{columns}
 
-\begin{column}{0.4\textwidth}
+\begin{column}{0.5\textwidth}
 \begin{figure}
 \includegraphics[width = 1.12\linewidth, left]{FCN.png}
 \caption{FCN}
@@ -343,7 +356,7 @@ F1                     &        0.776 (\textcolor{red}{0.828}) &     0.818 (\tex
 
 \begin{column}{0.3\textwidth}
 \begin{figure}
-\includegraphics[width = 1.1\linewidth]{PangNet.png}
+\includegraphics[width = 0.7\linewidth]{PangNet.png}
 \caption{PangNet}
 \end{figure}
 \end{column}
@@ -375,46 +388,5 @@ F1                     &        0.776 (\textcolor{red}{0.828}) &     0.818 (\tex
 
 \end{frame}
 
-\begin{frame}{Results summary}
-\begin{columns}
-\begin{column}{0.4\textwidth}
-\only<1,2>{\begin{figure}
-\includegraphics[width = \linewidth, left]{OldData.png}
-\caption{Benchmark}
-\end{figure}}
-\end{column}
-\begin{column}{0.4\textwidth}
-\only<2>{\begin{figure}
-\includegraphics[width = \linewidth, left]{New.png}
-\caption{Updated benchmark}
-\end{figure}}
-\end{column}
-\end{columns}
-\begin{columns}
-
-\begin{column}{0.4\textwidth}
-\begin{figure}
-\includegraphics[width = \linewidth, left]{FCN.png}
-\caption{FCN}
-\end{figure}
-\end{column}
-
-\begin{column}{0.3\textwidth}
-\begin{figure}
-\includegraphics[width = \linewidth]{DeconvNet.png}
-\caption{DeconvNet}
-\end{figure}
-\end{column}
-
-\begin{column}{0.3\textwidth}
-\begin{figure}
-\includegraphics[width = \linewidth]{PangNet.png}
-\caption{PangNet}
-\end{figure}
-\end{column}
-
-\end{columns}
-
-\end{frame}
-
 \end{document}
+
